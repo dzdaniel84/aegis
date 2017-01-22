@@ -16,7 +16,7 @@ function httpGet(text) {
     xmlHttp.onreadystatechange = function() {
     	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
     		var i = xmlHttp.responseText;
-    		if (i === 1) {
+    		if (i === "1") {
     			sendMessage();
     		}
     		determine(i);
