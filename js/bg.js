@@ -1,4 +1,5 @@
-var serv = "http://162.243.132.250:8080";
+var serv = "http://localhost:8080";
+var arr = [];
 
 function recordSearches(search) {
 	search = search.split("?q=")[1];
@@ -14,7 +15,11 @@ function httpGet(text) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
     	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-    		return xmlHttp.responseText;
+    		var i = xmlHttp.responseText;
+    		if (i === 1) {
+    			sendMessage();
+    		}
+    		determine(i);
     	}
     }
     xmlHttp.open("GET", serv + "/" + text, true);
@@ -23,10 +28,26 @@ function httpGet(text) {
 }
 
 function useWatson(text){
-	console.log("WORKING");
-	decision = httpGet(text);
-	if decision == true:
-		openPage();
+	determine(httpGet(text));
+}
+
+function sum(arr){
+	return arr.reduce(function(prev, cur) {return prev + cur;});
+}
+
+function determine(v){
+	if (v != undefined) {
+		arr.push(v);
+		if (arr.length > 15) {
+			if (sum(arr)/arr.length > 0.75) {
+				sendMessage();
+			}
+		}
+	}
+}
+
+function sendMessage(){
+	chrome.tabs.create({ url: "help.html" });
 }
 
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
