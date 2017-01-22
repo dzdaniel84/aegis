@@ -14,7 +14,7 @@ function httpGet(text) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
     	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-    		cb(xmlHttp.responseText);
+    		return xmlHttp.responseText;
     	}
     }
     xmlHttp.open("GET", serv + "/" + text, true);
@@ -22,13 +22,11 @@ function httpGet(text) {
     xmlHttp.send(null);
 }
 
-function cb(text) {
-	alert(text);
-}
-
 function useWatson(text){
 	console.log("WORKING");
-	httpGet(text);
+	decision = httpGet(text);
+	if decision == true:
+		openPage();
 }
 
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
