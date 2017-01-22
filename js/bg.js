@@ -1,4 +1,4 @@
-var serv = "http://localhost:8080";
+var serv = "http://162.243.132.250:8080";
 var arr = [];
 
 function recordSearches(search) {

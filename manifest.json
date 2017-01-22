@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Aegis",
-  "description": "This extension records Google Searches as of right now",
+  "description": "This extension monitors users' searches to keep track of mental health.",
   "version": "1.0",
   "browser_action": {
     "default_icon": "icon.png",
