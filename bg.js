@@ -1,18 +1,25 @@
-function recordSearches(url) {
-	url = url.split("?q=")[1];
-	if (url.includes("#q=")){
-		url = url.split("#q=")[1];
+var serv = "localhost:8080";
+
+function recordSearches(search) {
+	search = search.split("?q=")[1];
+	if (search.includes("#q=")){
+		search = search.split("#q=")[1];
 	} else {
-		url = url.split("&oq=")[0];
+		search = search.split("&oq=")[0];
 	}
-	while (url.includes("+")){
-		url = url.replace("+", " ");
-	}
-	useWatson(url);
+	//while (search.includes("+")){search = search.replace("+", " ");}
+	useWatson(search);
 }
 
-function useWatson(search){
+function httpGet(text) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", serv + "?q=" + text, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
 
+function useWatson(text){
+	alert(httpGet(text));
 }
 
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
