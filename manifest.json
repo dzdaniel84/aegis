@@ -7,6 +7,7 @@
     "default_icon": "icon_48.png"
   },
   "permissions": [
+    "*://*/*",
   	"tabs",
     "activeTab",
     "https://ajax.googleapis.com/"

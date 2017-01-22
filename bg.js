@@ -1,4 +1,4 @@
-var serv = "localhost:8080";
+var serv = "http://162.243.132.250:8080";
 
 function recordSearches(search) {
 	search = search.split("?q=")[1];
@@ -7,19 +7,28 @@ function recordSearches(search) {
 	} else {
 		search = search.split("&oq=")[0];
 	}
-	//while (search.includes("+")){search = search.replace("+", " ");}
 	useWatson(search);
 }
 
 function httpGet(text) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", serv + "?q=" + text, false);
+    xmlHttp.onreadystatechange = function() {
+    	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    		cb(xmlHttp.responseText);
+    	}
+    }
+    xmlHttp.open("GET", serv + "/" + text, true);
+    xmlHttp.setRequestHeader("Authorization", "");
     xmlHttp.send(null);
-    return xmlHttp.responseText;
+}
+
+function cb(text) {
+	alert(text);
 }
 
 function useWatson(text){
-	alert(httpGet(text));
+	console.log("WORKING");
+	httpGet(text);
 }
 
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
