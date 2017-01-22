@@ -8,7 +8,11 @@ function recordSearches(url) {
 	while (url.includes("+")){
 		url = url.replace("+", " ");
 	}
-	alert(url);
+	useWatson(url);
+}
+
+function useWatson(search){
+
 }
 
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
